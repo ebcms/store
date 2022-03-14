@@ -7,7 +7,7 @@
         document.getElementById('items').innerHTML = '<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>';
         $.ajax({
             type: "GET",
-            url: "{:$router->build('/ebcms/store/query')}",
+            url: "{echo $router->build('/ebcms/store/query')}",
             data: {
                 api: 'search',
                 params: params
@@ -16,7 +16,7 @@
             success: function(response) {
                 if (response.status) {
                     var html = '';
-                    var urlbase = "{:$router->build('/ebcms/store/item')}";
+                    var urlbase = "{echo $router->build('/ebcms/store/item')}";
                     response.data.items.forEach(element => {
                         html += '<div class="position-relative border rounded plugin-item d-flex p-2" style="width:400px;">';
                         html += '    <div>';
