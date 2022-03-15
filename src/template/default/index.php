@@ -14,7 +14,7 @@
             },
             dataType: "JSON",
             success: function(response) {
-                if (response.status) {
+                if (response.code == 0) {
                     var html = '';
                     var urlbase = "{echo $router->build('/ebcms/store/item')}";
                     response.data.items.forEach(element => {

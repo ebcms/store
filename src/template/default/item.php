@@ -67,7 +67,7 @@
                 },
                 dataType: "json",
                 success: function(response) {
-                    if (response.status) {
+                    if (response.code == 0) {
                         if (!EBCMS.state) {
                             EBCMS.stop('已终止(检测完毕)');
                             return;
@@ -93,7 +93,7 @@
                 },
                 dataType: "json",
                 success: function(response) {
-                    if (response.status) {
+                    if (response.code == 0) {
                         if (!EBCMS.state) {
                             EBCMS.stop('已终止(资源信息获取完毕)');
                             return;
@@ -116,7 +116,7 @@
                 url: "{echo $router->build('/ebcms/store/download')}",
                 dataType: "json",
                 success: function(response) {
-                    if (response.status) {
+                    if (response.code == 0) {
                         if (!EBCMS.state) {
                             EBCMS.stop('已终止(下载完毕)');
                             return;
@@ -139,7 +139,7 @@
                 url: "{echo $router->build('/ebcms/store/backup')}",
                 dataType: "json",
                 success: function(response) {
-                    if (response.status) {
+                    if (response.code == 0) {
                         if (!EBCMS.state) {
                             EBCMS.stop('已终止(程序备份完成)');
                             return;
@@ -162,7 +162,7 @@
                 url: "{echo $router->build('/ebcms/store/cover')}",
                 dataType: "json",
                 success: function(response) {
-                    if (response.status) {
+                    if (response.code == 0) {
                         EBCMS.console("程序升级完毕");
                         EBCMS.install();
                     } else {
@@ -181,7 +181,7 @@
                 url: "{echo $router->build('/ebcms/store/install')}",
                 dataType: "json",
                 success: function(response) {
-                    if (response.status) {
+                    if (response.code == 0) {
                         if (!EBCMS.state) {
                             EBCMS.stop('系统升级完成');
                             return;
@@ -207,7 +207,7 @@
                 url: "{echo $router->build('/ebcms/store/rollback')}",
                 dataType: "json",
                 success: function(response) {
-                    if (response.status) {
+                    if (response.code == 0) {
                         EBCMS.stop(response.message);
                     } else {
                         if (confirm('还原失败，继续尝试还原吗？')) {

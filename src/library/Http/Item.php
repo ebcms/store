@@ -20,8 +20,8 @@ class Item extends Common
         $res = $server->query('/detail', [
             'name' => $request->get('name'),
         ]);
-        if (!$res['status']) {
-            return $this->error($res['message']);
+        if ($res['code']) {
+            return $this->error($res['message'], $res['redirect_url'] ?? '', $res['code']);
         }
         $data['plugin'] = $res['data'];
         $data['type'] = 'install';

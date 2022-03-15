@@ -27,8 +27,8 @@ class Check extends Common
                 $param['version'] = $plugin['version'];
             }
             $res = $server->query('/check', $param);
-            if (!$res['status']) {
-                return $this->error($res['message']);
+            if ($res['code']) {
+                return $this->error($res['message'], $res['redirect_url'] ?? '', $res['code']);
             }
             return $this->success($res['message']);
         } catch (Throwable $th) {

@@ -26,19 +26,19 @@ class Server
         try {
             $url = $this->api . $path . '?' . http_build_query($this->getCommonParam());
             $res = (array)json_decode($this->post($url, $param), true);
-            if (!isset($res['status'])) {
+            if (!isset($res['code'])) {
                 return [
-                    'status' => 0,
+                    'code' => 1,
                     'message' => '接口错误！',
                 ];
             }
+            return $res;
         } catch (Throwable $th) {
             return [
-                'status' => 0,
+                'code' => 1,
                 'message' => '接口错误：' . $th->getMessage(),
             ];
         }
-        return $res;
     }
 
     private function getCommonParam(): array

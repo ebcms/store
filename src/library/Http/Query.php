@@ -15,10 +15,10 @@ class Query extends Common
         Server $server
     ) {
         $res = $server->query('/' . $request->get('api'), (array) $request->get('params'));
-        if ($res['status']) {
-            return $this->success('获取成功', $res['data']);
+        if ($res['code']) {
+            return $this->error($res['message'], $res['redirect_url'] ?? '', $res['code']);
         } else {
-            return $this->error($res['message']);
+            return $this->success('获取成功', $res['data']);
         }
     }
 }
