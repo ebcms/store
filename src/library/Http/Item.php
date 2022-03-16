@@ -23,7 +23,7 @@ class Item extends Common
         if ($res['code']) {
             return $this->error($res['message'], $res['redirect_url'] ?? '', $res['code']);
         }
-        $data['plugin'] = $res['data'];
+        $data['package'] = $res['data'];
         $data['type'] = 'install';
         $installed = $server->getInstalled();
         if (isset($installed[$request->get('name')])) {

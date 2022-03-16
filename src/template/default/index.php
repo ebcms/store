@@ -17,17 +17,17 @@
                 if (response.code == 0) {
                     var html = '';
                     var urlbase = "{echo $router->build('/ebcms/store/item')}";
-                    response.data.items.forEach(element => {
-                        html += '<div class="position-relative border rounded plugin-item d-flex p-2" style="width:400px;">';
+                    response.data.items.forEach(package => {
+                        html += '<div class="position-relative border rounded item d-flex p-2" style="width:400px;">';
                         html += '    <div>';
-                        html += '        <img style="cursor:pointer;height:100px;width:100px;" src="' + element.icon + '">';
+                        html += '        <img style="cursor:pointer;height:100px;width:100px;" src="' + package.extra.icon + '">';
                         html += '    </div>';
                         html += '    <div class="ms-4">';
-                        html += '        <div class="mt-0 mb-1"><strong><a class="text-decoration-none stretched-link" href="' + urlbase + '?name=' + element.name + '">' + element.title + '</a></strong><sup class="text-muted ms-1">' + element.version + '</sup></div>';
-                        html += '        <div class="text-muted text-wrap">' + element.description + '</div>';
+                        html += '        <div class="mt-0 mb-1"><strong><a class="text-decoration-none stretched-link" href="' + urlbase + '?name=' + package.name + '">' + package.title + '</a></strong><sup class="text-muted ms-1">' + package.version + '</sup></div>';
+                        html += '        <div class="text-muted text-wrap">' + package.description + '</div>';
                         html += '    </div>';
                         html += '    <div class="position-absolute top-0 end-0 p-2">';
-                        if (installed.hasOwnProperty(element.name) && (installed[element.name] != element.version)) {
+                        if (installed.hasOwnProperty(package.name) && (installed[package.name] != package.version)) {
                             html += '        <div class="text-danger fw-bold"><small>[可升级]<small></div>';
                         }
                         html += '    </div>';
@@ -42,7 +42,7 @@
 <div class="container">
     <div class="h1 my-4">应用商店</div>
     <style>
-        .plugin-item:hover {
+        .item:hover {
             background-color: #ffffbb;
         }
     </style>

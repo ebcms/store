@@ -60,8 +60,8 @@ class Server
     {
         $res = [];
         $install_path = InstalledVersions::getRootPackage()['install_path'];
-        foreach (glob($install_path . '/plugin/*/src/library/App.php') as $file) {
-            $app = substr($file, strlen($install_path . '/'), -strlen('/src/library/App.php'));
+        foreach (glob($install_path . '/app/*/*/src/library/App.php') as $file) {
+            $app = substr($file, strlen($install_path . '/app/'), -strlen('/src/library/App.php'));
 
             if (file_exists($install_path . '/config/' . $app . '/disabled.lock')) {
                 continue;
@@ -71,17 +71,17 @@ class Server
                 continue;
             }
 
-            $json_file = $install_path . '/' . $app . '/plugin.json';
-            if (!file_exists($json_file)) {
+            $composer_file = $install_path . '/app/' . $app . '/composer.json';
+            if (!file_exists($composer_file)) {
                 continue;
             }
 
-            $json = (array)json_decode(file_get_contents($json_file), true);
+            $json = (array)json_decode(file_get_contents($composer_file), true);
             if (!isset($json['version'])) {
                 continue;
             }
 
-            $app_file = $install_path . '/' . $app . '/src/library/App.php';
+            $app_file = $install_path . '/app/' . $app . '/src/library/App.php';
             if (!file_exists($app_file)) {
                 continue;
             }
@@ -95,7 +95,7 @@ class Server
                 continue;
             }
 
-            $res[substr($app, strlen('plugin/'))] = $json['version'];
+            $res[$app] = $json['version'];
         }
         return $res;
     }

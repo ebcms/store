@@ -32,20 +32,20 @@ class Source extends Common
                 ]),
                 'name' => $request->get('name'),
             ];
-            $plugin_json = Framework::getRoot() . '/plugin/' . $name . '/plugin.json';
-            if (file_exists($plugin_json)) {
-                $plugin = json_decode(file_get_contents($plugin_json), true);
-                $param['version'] = $plugin['version'];
+            $composer_file = Framework::getRoot() . '/app/' . $name . '/composer.json';
+            if (file_exists($composer_file)) {
+                $package = json_decode(file_get_contents($composer_file), true);
+                $param['version'] = $package['version'];
             }
 
             $res = $server->query('/source', $param);
             if ($res['code']) {
                 return $this->error($res['message'], $res['redirect_url'] ?? '', $res['code']);
             }
-            if (null === $plugin = $cache->get('storesource')) {
+            if (null === $package = $cache->get('storesource')) {
                 return $this->error('超时，请重新操作~');
             }
-            $session->set('plugin', $plugin);
+            $session->set('package', $package);
             return $this->success($res['message']);
         } catch (Throwable $th) {
             return $this->error($th->getMessage());

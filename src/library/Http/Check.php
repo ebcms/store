@@ -21,16 +21,16 @@ class Check extends Common
             $param = [
                 'name' => $request->get('name'),
             ];
-            $plugin_json = Framework::getRoot() . '/plugin/' . $name . '/plugin.json';
-            if (file_exists($plugin_json)) {
-                $plugin = json_decode(file_get_contents($plugin_json), true);
-                $param['version'] = $plugin['version'];
+            $composer_file = Framework::getRoot() . '/app/' . $name . '/composer.json';
+            if (file_exists($composer_file)) {
+                $package = json_decode(file_get_contents($composer_file), true);
+                $param['version'] = $package['version'];
             }
             $res = $server->query('/check', $param);
             if ($res['code']) {
                 return $this->error($res['message'], $res['redirect_url'] ?? '', $res['code']);
             }
-            return $this->success($res['message']);
+            return $this->success($res['message'], $res['data']);
         } catch (Throwable $th) {
             return $this->error($th->getMessage());
         }

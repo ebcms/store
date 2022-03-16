@@ -20,11 +20,11 @@ class Cover extends Common
         Session $session
     ) {
         try {
-            $plugin = $session->get('plugin');
+            $package = $session->get('package');
             $root_path = InstalledVersions::getRootPackage()['install_path'];
-            $plugin_dir = $root_path . '/plugin/' . $plugin['name'];
-            $this->delDir($plugin_dir);
-            $this->unZip($plugin['tmpfile'], $plugin_dir);
+            $package_dir = $root_path . '/app/' . $package['name'];
+            $this->delDir($package_dir);
+            $this->unZip($package['extra']['tmpfile'], $package_dir);
             return $this->success('文件更新成功!');
         } catch (Throwable $th) {
             return $this->error($th->getMessage());

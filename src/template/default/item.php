@@ -4,13 +4,13 @@
         <div class="border">
             <div class="d-flex p-3 position-relative ">
                 <div class="me-3">
-                    <img style="cursor:pointer;height:120px;width:120px;" src="{echo $plugin['icon']}">
+                    <img style="cursor:pointer;height:120px;width:120px;" src="{echo $package['extra']['icon']??''}">
                 </div>
                 <div class="flex-fill">
-                    <div class="mt-0 mb-1"><strong>{$plugin.title}</strong><sup class="text-muted ms-1">{$plugin.version}</sup></div>
-                    <div class="text-muted">{$plugin.description}</div>
+                    <div class="mt-0 mb-1"><strong>{$package['extra']['title']??$package['name']}</strong><sup class="text-muted ms-1">{$package['version']??'0.0.0'}</sup></div>
+                    <div class="text-muted">{$package['description']??''}</div>
                     <div class="mt-2">
-                        <a class="" href="{$plugin.url}" target="_blank">详细介绍&gt;</a>
+                        <a class="" href="{$package['extra']['url']}" target="_blank">详细介绍&gt;</a>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 type: "GET",
                 url: "{echo $router->build('/ebcms/store/check')}",
                 data: {
-                    name: "{$plugin.name}",
+                    name: "{$package.name}",
                 },
                 dataType: "json",
                 success: function(response) {
@@ -89,7 +89,7 @@
                 type: "GET",
                 url: "{echo $router->build('/ebcms/store/source')}",
                 data: {
-                    name: "{$plugin.name}",
+                    name: "{$package.name}",
                 },
                 dataType: "json",
                 success: function(response) {
