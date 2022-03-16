@@ -23,7 +23,7 @@
                         html += '        <img style="cursor:pointer;height:100px;width:100px;" src="' + package.extra.icon + '">';
                         html += '    </div>';
                         html += '    <div class="ms-4">';
-                        html += '        <div class="mt-0 mb-1"><strong><a class="text-decoration-none stretched-link" href="' + urlbase + '?name=' + package.name + '">' + package.title + '</a></strong><sup class="text-muted ms-1">' + package.version + '</sup></div>';
+                        html += '        <div class="mt-0 mb-1"><strong><a class="text-decoration-none stretched-link" href="' + urlbase + '?name=' + package.name + '">' + package.extra.title + '</a></strong><sup class="text-muted ms-1">' + package.version + '</sup></div>';
                         html += '        <div class="text-muted text-wrap">' + package.description + '</div>';
                         html += '    </div>';
                         html += '    <div class="position-absolute top-0 end-0 p-2">';
