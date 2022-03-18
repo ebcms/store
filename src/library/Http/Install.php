@@ -41,8 +41,8 @@ class Install extends Common
                 Framework::execute([$class_name, $action]);
             }
 
-            if (is_file($package['extra']['tmpfile'])) {
-                unlink($package['extra']['tmpfile']);
+            if (is_file($package['tmpfile'])) {
+                unlink($package['tmpfile']);
             }
 
             if (!is_dir(dirname($lock_file))) {

@@ -29,14 +29,17 @@ class Server
             if (!isset($res['code'])) {
                 return [
                     'code' => 1,
-                    'message' => '接口错误！',
+                    'message' => '服务端接口错误：无效响应！',
                 ];
+            }
+            if ($res['code']) {
+                $res['message'] = '服务端接口错误：' . ($res['message'] ?? '');
             }
             return $res;
         } catch (Throwable $th) {
             return [
                 'code' => 1,
-                'message' => '接口错误：' . $th->getMessage(),
+                'message' => '服务端接口错误：' . $th->getMessage(),
             ];
         }
     }

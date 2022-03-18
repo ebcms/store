@@ -23,18 +23,18 @@
                         html += '        <img style="cursor:pointer;height:100px;width:100px;" src="' + package.extra.icon + '">';
                         html += '    </div>';
                         html += '    <div class="ms-4">';
-                        html += '        <div class="mt-0 mb-1"><strong><a class="text-decoration-none stretched-link" href="' + urlbase + '?name=' + package.name + '">' + package.extra.title + '</a></strong><sup class="text-muted ms-1">' + package.version + '</sup></div>';
+                        html += '        <div class="mt-0 mb-1"><a class="text-decoration-none stretched-link fw-bold" href="' + urlbase + '?name=' + package.name + '">' + package.extra.title + '</a></div>';
                         html += '        <div class="text-muted text-wrap">' + package.description + '</div>';
-                        html += '    </div>';
-                        html += '    <div class="position-absolute top-0 end-0 p-2">';
-                        if (installed.hasOwnProperty(package.name) && (installed[package.name] != package.version)) {
-                            html += '        <div class="text-danger fw-bold"><small>[可升级]<small></div>';
-                        }
                         html += '    </div>';
                         html += '</div>';
                     });
                     document.getElementById('items').innerHTML = html;
+                } else {
+                    document.getElementById('items').innerHTML = response.message;
                 }
+            },
+            error: function() {
+                document.getElementById('items').innerHTML = '发生错误，请稍后再试';
             }
         });
     }
@@ -49,12 +49,13 @@
     <div class="my-3">
         <input type="text" class="form-control" placeholder="搜索：请输入关键词" style="width:300px;" id="search" oninput="search({q:this.value})">
         <div class="form-text mt-3">
+            <a class="bg-success rounded-pill text-white py-1 px-2 text-decoration-none" href="javascript:search({q:'随机'});">随机</a>
             <a class="bg-success rounded-pill text-white py-1 px-2 text-decoration-none" href="javascript:search({q:'推荐'});">推荐</a>
             <a class="bg-danger rounded-pill text-white py-1 px-2 text-decoration-none" href="javascript:search({q:'可升级'});">可升级</a>
             <a class="bg-primary rounded-pill text-white py-1 px-2 text-decoration-none" href="javascript:search({q:'已购买'});">已购买</a>
             <a class="bg-info rounded-pill text-white py-1 px-2 text-decoration-none" href="javascript:search({q:'近期上架'});">近期上架</a>
             <a class="bg-secondary rounded-pill text-white py-1 px-2 text-decoration-none" href="javascript:search({q:'近期更新'});">近期更新</a>
-            <!-- <a class="bg-secondary rounded-pill text-white py-1 px-2 text-decoration-none" href="javascript:search({q:'免费'});">免费</a> -->
+            <a class="bg-secondary rounded-pill text-white py-1 px-2 text-decoration-none" href="javascript:search({q:'专属'});">专属</a>
         </div>
     </div>
     <script>

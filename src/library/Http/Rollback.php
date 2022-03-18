@@ -21,14 +21,14 @@ class Rollback extends Common
             $package = $session->get('package');
             $root_path = InstalledVersions::getRootPackage()['install_path'];
             $this->delDir($root_path . '/app/' . $package['name']);
-            foreach ($package['extra']['backup_dirs'] as $dir) {
+            foreach ($package['backup_dirs'] as $dir) {
                 if (is_file($root_path . $dir)) {
                     unlink($root_path . $dir);
                 } elseif (is_dir($root_path . $dir)) {
                     $this->delDir($root_path . $dir);
                 }
             }
-            $this->copyDir($package['extra']['backup_path'], $root_path);
+            $this->copyDir($package['backup_path'], $root_path);
         } catch (Throwable $th) {
             return $this->error('还原失败：' . $th->getMessage());
         }

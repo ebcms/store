@@ -24,7 +24,7 @@ class Cover extends Common
             $root_path = InstalledVersions::getRootPackage()['install_path'];
             $package_dir = $root_path . '/app/' . $package['name'];
             $this->delDir($package_dir);
-            $this->unZip($package['extra']['tmpfile'], $package_dir);
+            $this->unZip($package['tmpfile'], $package_dir);
             return $this->success('文件更新成功!');
         } catch (Throwable $th) {
             return $this->error($th->getMessage());

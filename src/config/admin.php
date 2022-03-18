@@ -4,7 +4,7 @@ use DigPHP\Framework\Framework;
 use DigPHP\Router\Router;
 
 return [
-    'menu_list' => Framework::execute(function (
+    'menus' => Framework::execute(function (
         Router $router
     ): array {
         $res = [];

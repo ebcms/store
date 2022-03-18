@@ -10,7 +10,7 @@
                     <div class="mt-0 mb-1"><strong>{$package['extra']['title']??$package['name']}</strong><sup class="text-muted ms-1">{$package['version']??'0.0.0'}</sup></div>
                     <div class="text-muted">{$package['description']??''}</div>
                     <div class="mt-2">
-                        <a class="" href="{$package['extra']['url']}" target="_blank">详细介绍&gt;</a>
+                        <a class="" href="{$package['extra']['url']??''}" target="_blank">详细介绍&gt;</a>
                     </div>
                 </div>
             </div>
