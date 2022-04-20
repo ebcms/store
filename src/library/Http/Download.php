@@ -17,8 +17,8 @@ class Download extends Common
         Session $session
     ) {
         try {
-            $package = $session->get('package');
-            if (false === $content = file_get_contents($package['source'], false, stream_context_create([
+            $plugin = $session->get('plugin');
+            if (false === $content = file_get_contents($plugin['source'], false, stream_context_create([
                 'http' => [
                     'method' => "GET",
                     'timeout' => 10,
@@ -31,7 +31,7 @@ class Download extends Common
                 return $this->error('文件下载失败~');
             }
 
-            if (md5($content) != $package['md5']) {
+            if (md5($content) != $plugin['md5']) {
                 return $this->error('文件校验失败！');
             }
 
@@ -39,9 +39,9 @@ class Download extends Common
             if (false == file_put_contents($tmpfile, $content)) {
                 return $this->error('文件(' . $tmpfile . ')写入失败，请检查权限~');
             }
-            $package['tmpfile'] = $tmpfile;
-            $session->set('package', $package);
-            return $this->success('下载成功！', $package);
+            $plugin['tmpfile'] = $tmpfile;
+            $session->set('plugin', $plugin);
+            return $this->success('下载成功！', $plugin);
         } catch (Throwable $th) {
             return $this->error($th->getMessage());
         }

@@ -17,14 +17,14 @@
                 if (response.code == 0) {
                     var html = '';
                     var urlbase = "{echo $router->build('/ebcms/store/item')}";
-                    response.data.items.forEach(package => {
+                    response.data.items.forEach(item => {
                         html += '<div class="position-relative border rounded item d-flex p-2" style="width:400px;">';
                         html += '    <div>';
-                        html += '        <img style="cursor:pointer;height:100px;width:100px;" src="' + package.extra.icon + '">';
+                        html += '        <img style="cursor:pointer;height:100px;width:100px;" src="' + item.icon + '">';
                         html += '    </div>';
                         html += '    <div class="ms-4">';
-                        html += '        <div class="mt-0 mb-1"><a class="text-decoration-none stretched-link fw-bold" href="' + urlbase + '?name=' + package.name + '">' + package.extra.title + '</a></div>';
-                        html += '        <div class="text-muted text-wrap">' + package.description + '</div>';
+                        html += '        <div class="mt-0 mb-1"><a class="text-decoration-none stretched-link fw-bold" href="' + urlbase + '?name=' + item.name + '">' + item.title + '</a></div>';
+                        html += '        <div class="text-muted text-wrap">' + item.description + '</div>';
                         html += '    </div>';
                         html += '</div>';
                     });
@@ -68,4 +68,4 @@
     <div id="items" class="d-flex justify-content-start gap-3 flex-wrap">
     </div>
 </div>
-{include common/header@ebcms/admin}
+{include common/footer@ebcms/admin}

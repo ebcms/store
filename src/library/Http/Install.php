@@ -16,33 +16,33 @@ class Install extends Common
         Session $session
     ) {
         try {
-            $package = $session->get('package');
+            $plugin = $session->get('plugin');
             $root_path = InstalledVersions::getRootPackage()['install_path'];
 
-            $composer_file = $root_path . '/app/' . $package['name'] . '/composer.json';
-            if (!is_file($composer_file)) {
+            $json_file = $root_path . '/plugin/' . $plugin['name'] . '/plugin.json';
+            if (!is_file($json_file)) {
                 return $this->error('文件无效！');
             }
-            $json = (array) json_decode(file_get_contents($composer_file), true);
+            $json = (array) json_decode(file_get_contents($json_file), true);
             if (
                 !isset($json['name']) ||
-                $json['name'] != $package['name'] ||
+                $json['name'] != $plugin['name'] ||
                 !isset($json['version']) ||
-                $json['version'] != $package['version']
+                $json['version'] != $plugin['version']
             ) {
                 return $this->error('文件无效！');
             }
 
-            $lock_file = $root_path . '/config/' . $package['name'] . '/install.lock';
+            $lock_file = $root_path . '/config/plugin/' . $plugin['name'] . '/install.lock';
 
-            $class_name = str_replace(['-', '/'], ['', '\\'], ucwords('\\App\\' . $package['name'] . '\\App', '/\\-'));
+            $class_name = str_replace(['-', '/'], ['', '\\'], ucwords('\\App\\' . $plugin['name'] . '\\App', '/\\-'));
             $action = is_file($lock_file) ? 'onUpdate' : 'onInstall';
             if (method_exists($class_name, $action)) {
                 Framework::execute([$class_name, $action]);
             }
 
-            if (is_file($package['tmpfile'])) {
-                unlink($package['tmpfile']);
+            if (is_file($plugin['tmpfile'])) {
+                unlink($plugin['tmpfile']);
             }
 
             if (!is_dir(dirname($lock_file))) {
@@ -51,9 +51,9 @@ class Install extends Common
             if (is_file(dirname($lock_file) . '/disabled.lock')) {
                 unlink(dirname($lock_file) . '/disabled.lock');
             }
-            file_put_contents($lock_file, $package['version']);
+            file_put_contents($lock_file, $plugin['version']);
 
-            $session->delete('package');
+            $session->delete('plugin');
 
             return $this->success('安装成功!');
         } catch (Throwable $th) {

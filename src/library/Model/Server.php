@@ -46,10 +46,10 @@ class Server
 
     private function getCommonParam(): array
     {
-        $package = InstalledVersions::getRootPackage();
+        $root = InstalledVersions::getRootPackage();
         $res = [];
-        $res['name'] = $package['name'];
-        $res['version'] = $package['pretty_version'];
+        $res['name'] = $root['name'];
+        $res['version'] = $root['pretty_version'];
         $res['site'] = Framework::execute(function (
             Router $router
         ): string {
@@ -63,34 +63,19 @@ class Server
     {
         $res = [];
         $install_path = InstalledVersions::getRootPackage()['install_path'];
-        foreach (glob($install_path . '/app/*/*/src/library/App.php') as $file) {
-            $app = substr($file, strlen($install_path . '/app/'), -strlen('/src/library/App.php'));
+        foreach (glob($install_path . '/plugin/*/src/library/App.php') as $file) {
 
-            if (file_exists($install_path . '/config/' . $app . '/disabled.lock')) {
+            $name = substr($file, strlen($install_path . '/plugin/'), -strlen('/src/library/App.php'));
+
+            if (file_exists($install_path . '/config/plugin/' . $name . '/disabled.lock')) {
                 continue;
             }
 
-            if (!file_exists($install_path . '/config/' . $app . '/install.lock')) {
+            if (!file_exists($install_path . '/config/plugin/' . $name . '/install.lock')) {
                 continue;
             }
 
-            $composer_file = $install_path . '/app/' . $app . '/composer.json';
-            if (!file_exists($composer_file)) {
-                continue;
-            }
-
-            $json = (array)json_decode(file_get_contents($composer_file), true);
-            if (!isset($json['version'])) {
-                continue;
-            }
-
-            $app_file = $install_path . '/app/' . $app . '/src/library/App.php';
-            if (!file_exists($app_file)) {
-                continue;
-            }
-            require_once $app_file;
-
-            $class_name = str_replace(['-', '/'], ['', '\\'], ucwords('\\App\\' . $app . '\\App', '/\\-'));
+            $class_name = str_replace(['-', '/'], ['', '\\'], ucwords('\\App\\Plugin\\' . $name . '\\App', '/\\-'));
             if (
                 !class_exists($class_name)
                 || !is_subclass_of($class_name, AppInterface::class)
@@ -98,7 +83,10 @@ class Server
                 continue;
             }
 
-            $res[$app] = $json['version'];
+            $json_file = $install_path . '/plugin/' . $name . '/plugin.json';
+            $json = file_exists($json_file) ? json_decode(file_get_contents($json_file), true) : [];
+
+            $res[$name] = $json['version'] ?? '0.0.0.0';
         }
         return $res;
     }

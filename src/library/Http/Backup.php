@@ -20,14 +20,14 @@ class Backup extends Common
     ) {
         try {
             $root_path = InstalledVersions::getRootPackage()['install_path'];
-            $package = $session->get('package');
-            $package['backup_path'] = $root_path . '/backup/' . date('YmdHis');
-            $package['backup_dirs'] = [
-                'app/', // todo
+            $plugin = $session->get('plugin');
+            $plugin['backup_path'] = $root_path . '/backup/' . date('YmdHis');
+            $plugin['backup_dirs'] = [
+                'plugin/', // todo
             ];
-            $this->backup($package['backup_dirs'], $root_path, $package['backup_path']);
-            $session->set('package', $package);
-            return $this->success('备份成功！', $package);
+            $this->backup($plugin['backup_dirs'], $root_path, $plugin['backup_path']);
+            $session->set('plugin', $plugin);
+            return $this->success('备份成功！', $plugin);
         } catch (Throwable $th) {
             return $this->error($th->getMessage());
         }

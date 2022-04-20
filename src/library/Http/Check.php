@@ -21,10 +21,10 @@ class Check extends Common
             $param = [
                 'name' => $request->get('name'),
             ];
-            $composer_file = Framework::getRoot() . '/app/' . $name . '/composer.json';
-            if (file_exists($composer_file)) {
-                $package = json_decode(file_get_contents($composer_file), true);
-                $param['version'] = $package['version'];
+            $json_file = Framework::getRoot() . '/plugin/' . $name . '/plugin.json';
+            if (file_exists($json_file)) {
+                $json = json_decode(file_get_contents($json_file), true);
+                $param['version'] = $json['version'];
             }
             $res = $server->query('/check', $param);
             if ($res['code']) {
