@@ -6,8 +6,8 @@ namespace App\Ebcms\Store\Http;
 
 use App\Ebcms\Admin\Http\Common;
 use Composer\InstalledVersions;
-use DigPHP\Framework\Framework;
 use DigPHP\Session\Session;
+use Ebcms\Framework\Framework;
 use Throwable;
 
 class Install extends Common

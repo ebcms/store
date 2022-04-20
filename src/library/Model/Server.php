@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Ebcms\Store\Model;
 
 use Composer\InstalledVersions;
-use DigPHP\Framework\AppInterface;
-use DigPHP\Framework\Config;
-use DigPHP\Framework\Framework;
 use DigPHP\Router\Router;
+use Ebcms\Framework\AppInterface;
+use Ebcms\Framework\Config;
+use Ebcms\Framework\Framework;
 use Exception;
 use Throwable;
 
