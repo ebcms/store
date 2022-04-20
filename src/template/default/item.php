@@ -1,39 +1,29 @@
 {include common/header@ebcms/admin}
 <div class="container">
     <div class="h1 my-4">应用商店</div>
-    <div class="my-4">
-        <div class="border">
-            <div class="d-flex p-3 position-relative ">
-                <div class="me-3">
-                    <img style="cursor:pointer;height:120px;width:120px;" src="{echo $plugin['icon']??''}">
-                </div>
-                <div class="flex-fill">
-                    <div class="mt-0 mb-1"><strong>{$plugin['title']??$plugin['name']}</strong><sup class="text-muted ms-1">{$plugin['version']??'0.0.0'}</sup></div>
-                    <div class="text-muted">{$plugin['description']??''}</div>
-                    <div class="mt-2">
-                        <a class="" href="{$plugin['url']??''}" target="_blank">详细介绍&gt;</a>
-                    </div>
+    <div class="my-4 d-flex flex-column gap-4">
+        <div class="d-flex gap-3">
+            <div>
+                <img src="{echo $plugin['icon']}" class="img-thumbnail" width="100" alt="">
+            </div>
+            <div class="d-flex flex-column gap-2 flex-grow-1 bg-light p-3">
+                <div><span class="fs-6 fw-bold">{$plugin['title']?:'-'}</span><sup class="ms-1 text-secondary">{$plugin['version']??''}</sup></div>
+                <div>{$plugin.description}</div>
+                <div><code>{$plugin.name}</code> </div>
+                <div>
+                    <a href="{$plugin['url']??''}" target="_blank">详细介绍&gt;</a>
                 </div>
             </div>
-            <div class="p-3 border-top">
-                {if $type == 'install'}
-                <button class="btn btn-primary" onclick="EBCMS.handler();" id="handler">一键安装</button>
-                {else}
-                <button class="btn btn-primary" onclick="EBCMS.handler();" id="handler">一键升级</button>
-                {/if}
-                <button class="btn btn-secondary ms-2" onclick="$('.console').html('')">清理日志</button>
-            </div>
         </div>
-        <style>
-            .console {
-                background-color: #000;
-                height: 300px;
-                width: 100%;
-                overflow-y: auto;
-            }
-        </style>
-        <div class="console p-3 text-white">
+        <div>
+            {if $type == 'install'}
+            <button class="btn btn-primary" onclick="EBCMS.handler();" id="handler">一键安装</button>
+            {else}
+            <button class="btn btn-primary" onclick="EBCMS.handler();" id="handler">一键升级</button>
+            {/if}
+            <button class="btn btn-secondary ms-2" onclick="$('.console').html('')">清理日志</button>
         </div>
+        <div class="console p-3 text-white bg-dark overflow-auto" style="height: 300px;"></div>
     </div>
 </div>
 <script>
