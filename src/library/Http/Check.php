@@ -6,8 +6,8 @@ namespace App\Ebcms\Store\Http;
 
 use App\Ebcms\Admin\Http\Common;
 use App\Ebcms\Store\Model\Server;
-use DigPHP\Request\Request;
-use Ebcms\Framework\Framework;
+use DiggPHP\Request\Request;
+use DiggPHP\Framework\Framework;
 use Throwable;
 
 class Check extends Common

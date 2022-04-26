@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Ebcms\Store;
 
-use Ebcms\Framework\AppInterface;
+use DiggPHP\Framework\AppInterface;
 
 class App implements AppInterface
 {

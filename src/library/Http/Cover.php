@@ -7,7 +7,7 @@ namespace App\Ebcms\Store\Http;
 use App\Ebcms\Admin\Http\Common;
 use App\Ebcms\Store\Traits\DirTrait;
 use Composer\InstalledVersions;
-use DigPHP\Session\Session;
+use DiggPHP\Session\Session;
 use Exception;
 use Throwable;
 use ZipArchive;

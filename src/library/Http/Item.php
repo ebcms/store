@@ -6,8 +6,8 @@ namespace App\Ebcms\Store\Http;
 
 use App\Ebcms\Admin\Http\Common;
 use App\Ebcms\Store\Model\Server;
-use DigPHP\Request\Request;
-use DigPHP\Template\Template;
+use DiggPHP\Request\Request;
+use DiggPHP\Template\Template;
 
 class Item extends Common
 {

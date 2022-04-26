@@ -6,8 +6,8 @@ namespace App\Ebcms\Store\Http;
 
 use App\Ebcms\Admin\Traits\ResponseTrait;
 use App\Ebcms\Admin\Traits\RestfulTrait;
-use DigPHP\Psr16\LocalAdapter;
-use DigPHP\Request\Request;
+use DiggPHP\Psr16\LocalAdapter;
+use DiggPHP\Request\Request;
 
 class Api
 {
