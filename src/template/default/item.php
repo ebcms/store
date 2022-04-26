@@ -4,7 +4,7 @@
     <div class="my-4 d-flex flex-column gap-4">
         <div class="d-flex gap-3">
             <div>
-                <img src="{echo $plugin['icon']}" class="img-thumbnail" width="100" alt="">
+                <img src="{echo $plugin['logo']}" class="img-thumbnail" width="100" alt="">
             </div>
             <div class="d-flex flex-column gap-2 flex-grow-1 bg-light p-3">
                 <div><span class="fs-6 fw-bold">{$plugin['title']?:'-'}</span><sup class="ms-1 text-secondary">{$plugin['version']??''}</sup></div>

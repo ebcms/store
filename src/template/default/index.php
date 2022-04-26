@@ -20,7 +20,7 @@
                     response.data.items.forEach(item => {
                         html += '<div class="d-flex gap-3 position-relative">';
                         html += '    <div>';
-                        html += '        <a class="text-decoration-none stretched-link fw-bold" href="' + urlbase + '?name=' + item.name + '"><img class="img-thumbnail" width="100" src="' + item.icon + '"></a>';
+                        html += '        <a class="text-decoration-none stretched-link fw-bold" href="' + urlbase + '?name=' + item.name + '"><img class="img-thumbnail" width="100" src="' + item.logo + '"></a>';
                         html += '    </div>';
                         html += '    <div class="d-flex flex-column gap-2 flex-grow-1 bg-light p-3">';
                         html += '        <div><span class="fs-6 fw-bold">' + item.title + '</span><sup class="ms-1 text-secondary">' + item.version + '</sup></div>';
