@@ -55,7 +55,7 @@ class Server
         ): string {
             return $router->build('/');
         });
-        $res['install'] = $this->getInstalled();
+        $res['installed'] = $this->getInstalled();
         return $res;
     }
 
