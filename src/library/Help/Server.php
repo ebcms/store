@@ -14,11 +14,12 @@ use Throwable;
 class Server
 {
 
-    private $api;
+    private $api = 'https://www.ebcms.com/ebcms/store-server/api';
 
-    public function __construct(string $api = 'http://43.155.74.117/ebcms/store-server/api')
+    public function setApi(string $api): self
     {
         $this->api = $api;
+        return $this;
     }
 
     public function query(string $path, array $param = []): array
