@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Ebcms\Store\Http;
 
 use App\Ebcms\Store\Help\Curl;
-use App\Phpomg\Admin\Http\Common;
-use PHPOMG\Help\Response;
-use PHPOMG\Facade\Session;
+use App\Phpapp\Admin\Http\Common;
+use PHPAPP\Help\Response;
+use PHPAPP\Facade\Session;
 use Throwable;
 
 class Download extends Common

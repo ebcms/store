@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Ebcms\Store\Http;
 
 use Composer\Autoload\ClassLoader;
-use PHPOMG\Help\Request;
-use PHPOMG\Help\Response;
+use PHPAPP\Help\Request;
+use PHPAPP\Help\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

@@ -1,4 +1,4 @@
-{include common/header@phpomg/admin}
+{include common/header@phpapp/admin}
 <div class="h1 my-4">应用商店</div>
 <div class="my-4 d-flex flex-column gap-4">
     <div class="d-flex gap-3">
@@ -220,4 +220,4 @@
         }
     });
 </script>
-{include common/footer@phpomg/admin}
+{include common/footer@phpapp/admin}

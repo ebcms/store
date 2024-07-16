@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Ebcms\Store\Http;
 
-use App\Phpomg\Admin\Http\Common;
-use PHPOMG\Facade\Template;
+use App\Phpapp\Admin\Http\Common;
+use PHPAPP\Facade\Template;
 
 class Index extends Common
 {

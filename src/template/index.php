@@ -1,4 +1,4 @@
-{include common/header@phpomg/admin}
+{include common/header@phpapp/admin}
 <script>
     function search(params) {
         document.getElementById('search').value = params.q;
@@ -58,4 +58,4 @@
     });
 </script>
 <div id="items" class="d-flex flex-column gap-4"></div>
-{include common/footer@phpomg/admin}
+{include common/footer@phpapp/admin}

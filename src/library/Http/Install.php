@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Ebcms\Store\Http;
 
-use App\Phpomg\Admin\Http\Common;
-use PHPOMG\Help\Response;
+use App\Phpapp\Admin\Http\Common;
+use PHPAPP\Help\Response;
 use Composer\Autoload\ClassLoader;
-use PHPOMG\Facade\App;
-use PHPOMG\Facade\Framework;
-use PHPOMG\Facade\Session;
+use PHPAPP\Facade\App;
+use PHPAPP\Facade\Framework;
+use PHPAPP\Facade\Session;
 use ReflectionClass;
 use Throwable;
 

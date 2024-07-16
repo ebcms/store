@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Ebcms\Store\Http;
 
-use App\Phpomg\Admin\Http\Common;
+use App\Phpapp\Admin\Http\Common;
 use App\Ebcms\Store\Help\Server;
-use PHPOMG\Facade\App;
-use PHPOMG\Help\Response;
-use PHPOMG\Help\Request;
-use PHPOMG\Facade\Template;
+use PHPAPP\Facade\App;
+use PHPAPP\Help\Response;
+use PHPAPP\Help\Request;
+use PHPAPP\Facade\Template;
 
 class Item extends Common
 {

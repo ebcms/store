@@ -7,7 +7,7 @@ namespace App\Ebcms\Store\Help;
 use Composer\Autoload\ClassLoader;
 use Composer\InstalledVersions;
 use Exception;
-use PHPOMG\Facade\App;
+use PHPAPP\Facade\App;
 use ReflectionClass;
 use Throwable;
 

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Ebcms\Store\Http;
 
 use App\Ebcms\Store\Help\Zip;
-use App\Phpomg\Admin\Http\Common;
+use App\Phpapp\Admin\Http\Common;
 use Composer\Autoload\ClassLoader;
-use PHPOMG\Facade\Session;
-use PHPOMG\Help\Response;
+use PHPAPP\Facade\Session;
+use PHPAPP\Help\Response;
 use ReflectionClass;
 use Throwable;
 use ZipArchive;
