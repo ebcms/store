@@ -3,9 +3,9 @@
     "title": "应用商店",
     "description": "在线下载应用",
     "license": "GPL-3.0",
-    "type": "phpapp",
+    "type": "php94",
     "require": {
-        "phpomg/admin": "^1.0"
+        "php94/admin": "^1.0"
     },
     "autoload": {
         "psr-4": {

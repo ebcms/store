@@ -7,7 +7,7 @@ namespace App\Ebcms\Store\Help;
 use Composer\Autoload\ClassLoader;
 use Composer\InstalledVersions;
 use Exception;
-use PHPAPP\Facade\App;
+use PHP94\Facade\App;
 use ReflectionClass;
 use Throwable;
 
@@ -27,16 +27,16 @@ class Server
         try {
             $response = $this->post($this->api . $path, array_merge($param, $this->getCommonParam()));
             $res = (array) json_decode($response, true);
-            if (!isset($res['status'])) {
+            if (!isset($res['error'])) {
                 return [
-                    'status' => 0,
+                    'error' => 1,
                     'message' => '错误：服务器无效响应！',
                 ];
             }
             return $res;
         } catch (Throwable $th) {
             return [
-                'status' => 0,
+                'error' => 1,
                 'message' => '错误：' . $th->getMessage(),
             ];
         }
@@ -60,7 +60,6 @@ class Server
         $res['project'] = $json['name'];
         $res['version'] = $json['version'];
         $res['site'] = $this->getSite();
-        $res['site'] = 'http://43.155.74.117/index.php';
         $res['installed'] = $this->getInstalled();
         return $res;
     }

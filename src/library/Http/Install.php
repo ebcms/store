@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Ebcms\Store\Http;
 
-use App\Phpapp\Admin\Http\Common;
-use PHPAPP\Help\Response;
+use App\Php94\Admin\Http\Common;
+use PHP94\Help\Response;
 use Composer\Autoload\ClassLoader;
-use PHPAPP\Facade\App;
-use PHPAPP\Facade\Framework;
-use PHPAPP\Facade\Session;
+use PHP94\Facade\App;
+use PHP94\Facade\Session;
 use ReflectionClass;
 use Throwable;
 
@@ -24,14 +23,18 @@ class Install extends Common
             $packagefile = App::getDir($appitem['name']) . '/src/config/package.php';
             $actiontype = App::isInstalled($appitem['name']) ? 'update' : 'install';
             if ($fn = $this->getFn($packagefile, $actiontype)) {
-                Framework::execute($fn);
+                if ($actiontype == 'update') {
+                    $fn($appitem['oldversion'] ?? '');
+                } else {
+                    $fn();
+                }
             }
 
             if (is_file($appitem['tmpfile'])) {
                 unlink($appitem['tmpfile']);
             }
 
-            $lock_file = $root . '/config/' . $appitem['name'] . '/install.lock';
+            $lock_file = $root . '/config/' . $appitem['name'] . '/installed.lock';
             if (!is_dir(dirname($lock_file))) {
                 mkdir(dirname($lock_file), 0755, true);
             }
@@ -44,7 +47,7 @@ class Install extends Common
 
             return Response::success('安装成功!');
         } catch (Throwable $th) {
-            return Response::failure($th->getMessage());
+            return Response::error($th->getMessage());
         }
     }
 

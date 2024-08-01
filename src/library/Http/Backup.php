@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Ebcms\Store\Http;
 
 use App\Ebcms\Store\Help\Zip;
-use App\Phpapp\Admin\Http\Common;
+use App\Php94\Admin\Http\Common;
 use Composer\Autoload\ClassLoader;
-use PHPAPP\Facade\Session;
-use PHPAPP\Help\Response;
+use PHP94\Facade\Session;
+use PHP94\Help\Response;
 use ReflectionClass;
 use Throwable;
 use ZipArchive;
@@ -34,9 +34,9 @@ class Backup extends Common
             $zip->close();
 
             Session::set('appitem', $appitem);
-            return Response::success('备份成功！', $appitem);
+            return Response::success('备份成功！', null, $appitem);
         } catch (Throwable $th) {
-            return Response::failure($th->getMessage());
+            return Response::error($th->getMessage());
         }
     }
 }

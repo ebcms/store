@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Ebcms\Store\Http;
 
-use App\Phpapp\Admin\Http\Common;
+use App\Php94\Admin\Http\Common;
 use App\Ebcms\Store\Help\Server;
-use PHPAPP\Facade\App;
-use PHPAPP\Help\Response;
-use PHPAPP\Help\Request;
-use PHPAPP\Facade\Template;
+use PHP94\Facade\App;
+use PHP94\Help\Response;
+use PHP94\Help\Request;
+use PHP94\Facade\Template;
 
 class Item extends Common
 {
@@ -18,8 +18,8 @@ class Item extends Common
         $res = (new Server)->query('/detail', [
             'name' => Request::get('name'),
         ]);
-        if (!$res['status']) {
-            return Response::failure($res['message'], $res['redirect_url'] ?? '', $res['data'] ?? null);
+        if ($res['error']) {
+            return Response::error($res['message'], $res['redirect_url'] ?? '', $res['data'] ?? null, $res['error'] ?? 1);
         }
         return Template::render('item@ebcms/store', [
             'app' => $res['data'],

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Ebcms\Store\Http;
 
-use App\Phpapp\Admin\Http\Common;
+use App\Php94\Admin\Http\Common;
 use Composer\Autoload\ClassLoader;
 use Exception;
-use PHPAPP\Facade\Session;
-use PHPAPP\Help\Response;
+use PHP94\Facade\Session;
+use PHP94\Help\Response;
 use ReflectionClass;
 use Throwable;
 use ZipArchive;
@@ -23,14 +23,15 @@ class Rollback extends Common
             $root = dirname((new ReflectionClass(ClassLoader::class))->getFileName(), 3);
             $appdir = $root . '/app/' . $appitem['name'];
             if (!$this->delDir($appdir)) {
-                return Response::failure('部分目录或文件无法删除，无法回滚');
+                return Response::error('部分目录或文件无法删除，无法回滚');
             }
             if (!mkdir($appdir, 0755, true)) {
-                return Response::failure('无法创建应用目录，无法回滚');
+                return Response::error('无法创建应用目录，无法回滚');
             }
             $this->unZip($appitem['backup_file'], $appdir);
+            return Response::success('回滚成功!');
         } catch (Throwable $th) {
-            return Response::failure('还原失败：' . $th->getMessage());
+            return Response::error('还原失败：' . $th->getMessage());
         }
     }
 

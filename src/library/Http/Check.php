@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Ebcms\Store\Http;
 
-use App\Phpapp\Admin\Http\Common;
+use App\Php94\Admin\Http\Common;
 use App\Ebcms\Store\Help\Server;
-use PHPAPP\Facade\App;
-use PHPAPP\Help\Response;
-use PHPAPP\Help\Request;
+use PHP94\Facade\App;
+use PHP94\Help\Response;
+use PHP94\Help\Request;
 use Throwable;
 
 class Check extends Common
@@ -17,18 +17,18 @@ class Check extends Common
     {
         try {
             if (App::isCore(Request::get('name'))) {
-                return Response::failure('核心项目，请通过composer更新');
+                return Response::error('核心项目，请通过composer更新');
             }
             $res = (new Server)->query('/check', [
                 'name' => Request::get('name'),
             ]);
-            if (!$res['status']) {
-                return Response::failure($res['message'], $res['redirect_url'] ?? null, $res['data'] ?? null);
+            if ($res['error']) {
+                return Response::error($res['message'], $res['redirect_url'] ?? null, $res['data'] ?? null, $res['error'] ?? 1);
             } else {
                 return Response::success($res['message'], $res['redirect_url'] ?? null, $res['data'] ?? null);
             }
         } catch (Throwable $th) {
-            return Response::failure($th->getMessage());
+            return Response::error($th->getMessage());
         }
     }
 }

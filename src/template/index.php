@@ -1,8 +1,8 @@
-{include common/header@phpapp/admin}
+{include common/header@php94/admin}
 <script>
     function search(params) {
         document.getElementById('search').value = params.q;
-        document.getElementById('items').innerHTML = '<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>';
+        document.getElementById('items').innerHTML = '<div class="spinner-border"><span class="visually-hidden">Loading...</span></div>';
         $.ajax({
             type: "GET",
             url: "{echo $router->build('/ebcms/store/query')}",
@@ -12,7 +12,7 @@
             },
             dataType: "JSON",
             success: function(response) {
-                if (response.status) {
+                if (!response.error) {
                     var html = '';
                     var urlbase = "{echo $router->build('/ebcms/store/item')}";
                     response.data.items.forEach(item => {
@@ -40,7 +40,7 @@
 </script>
 <div class="h1 my-4">应用商店</div>
 <div class="my-3">
-    <input type="search" class="form-control" placeholder="搜索：请输入关键词" style="width:300px;" id="search" oninput="search({q:this.value})">
+    <input type="search" class="form-control" placeholder="搜索：请输入关键词" style="width:300px;" id="search" value="{$request->get('q', '')}" oninput="search({q:this.value})">
     <div class="form-text mt-3">
         <a class="bg-primary rounded-pill text-white py-1 px-2 text-decoration-none" href="javascript:search({q:'我的'});">我的</a>
         <a class="bg-danger rounded-pill text-white py-1 px-2 text-decoration-none" href="javascript:search({q:'可升级'});">可升级</a>
@@ -53,9 +53,9 @@
 <script>
     $(function() {
         search({
-            q: ''
+            q: document.getElementById("search").value
         });
     });
 </script>
 <div id="items" class="d-flex flex-column gap-4"></div>
-{include common/footer@phpapp/admin}
+{include common/footer@php94/admin}

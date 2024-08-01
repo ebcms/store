@@ -1,4 +1,4 @@
-{include common/header@phpapp/admin}
+{include common/header@php94/admin}
 <div class="h1 my-4">应用商店</div>
 <div class="my-4 d-flex flex-column gap-4">
     <div class="d-flex gap-3">
@@ -55,7 +55,7 @@
                 },
                 dataType: "json",
                 success: function(response) {
-                    if (!response.status) {
+                    if (response.error) {
                         EBCMS.stop(response.message);
                     } else {
                         if (!EBCMS.state) {
@@ -81,7 +81,7 @@
                 },
                 dataType: "json",
                 success: function(response) {
-                    if (!response.status) {
+                    if (response.error) {
                         EBCMS.stop(response.message);
                     } else {
                         if (!EBCMS.state) {
@@ -104,7 +104,7 @@
                 url: "{echo $router->build('/ebcms/store/download')}",
                 dataType: "json",
                 success: function(response) {
-                    if (!response.status) {
+                    if (response.error) {
                         EBCMS.stop(response.message);
                     } else {
                         if (!EBCMS.state) {
@@ -127,7 +127,7 @@
                 url: "{echo $router->build('/ebcms/store/backup')}",
                 dataType: "json",
                 success: function(response) {
-                    if (!response.status) {
+                    if (response.error) {
                         EBCMS.stop(response.message);
                     } else {
                         if (!EBCMS.state) {
@@ -150,7 +150,7 @@
                 url: "{echo $router->build('/ebcms/store/cover')}",
                 dataType: "json",
                 success: function(response) {
-                    if (!response.status) {
+                    if (response.error) {
                         EBCMS.rollback(response.message);
                     } else {
                         EBCMS.console("程序升级完毕");
@@ -169,7 +169,7 @@
                 url: "{echo $router->build('/ebcms/store/install')}",
                 dataType: "json",
                 success: function(response) {
-                    if (!response.status) {
+                    if (response.error) {
                         EBCMS.rollback(response.message);
                     } else {
                         if (!EBCMS.state) {
@@ -195,7 +195,7 @@
                 url: "{echo $router->build('/ebcms/store/rollback')}",
                 dataType: "json",
                 success: function(response) {
-                    if (!response.status) {
+                    if (response.error) {
                         if (confirm('还原失败，继续尝试还原吗？')) {
                             EBCMS.rollback(response.message);
                         } else {
@@ -220,4 +220,4 @@
         }
     });
 </script>
-{include common/footer@phpapp/admin}
+{include common/footer@php94/admin}
